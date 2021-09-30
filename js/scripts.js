@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
 window.addEventListener("DOMContentLoaded", (event) => {
-  const NEXT_GOAL = 10000;
+  const NEXT_GOAL = 15000;
   const morePrizesThresholdDynamicSpan = document.getElementById(
     "more-prizes-threshold-dynamic"
   );

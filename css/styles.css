@@ -213,6 +213,7 @@ address {
 ol,
 ul {
   padding-left: 2rem;
+  line-height: 1.8rem;
 }
 
 ol,
