@@ -4,6 +4,60 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
 window.addEventListener("DOMContentLoaded", (event) => {
+  const NEXT_GOAL = 10000;
+  const morePrizesThresholdDynamicSpan = document.getElementById(
+    "more-prizes-threshold-dynamic"
+  );
+  const morePrizesThresholdSpan = document.getElementById(
+    "more-prizes-threshold"
+  );
+  morePrizesThresholdSpan.innerText = `once we have raised \$${Number(
+    NEXT_GOAL
+  ).toLocaleString()}.`;
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbyOWUsJXvVOrY4G5LExslJ0xxAaHkrLa1pDLdopNsiaI3TRy6Xx/exec",
+    {
+      method: "POST",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        method: "GET",
+        sheet: "totals",
+        id: 2,
+      }),
+    }
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      if (data == null || data.status !== 200 || data.data == null) {
+        return;
+      }
+
+      const totalSpan = document.getElementById("donation-total");
+      totalSpan.innerText = `\$${Number(data.data.dollars).toLocaleString()}`;
+
+      if (data.data.dollars < NEXT_GOAL) {
+        const dollarsToGoal = `once we have raised \$${Number(
+          NEXT_GOAL
+        ).toLocaleString()}. We're only \$${Number(
+          NEXT_GOAL - data.data.dollars
+        ).toLocaleString()} away!`;
+        morePrizesThresholdDynamicSpan.innerText = dollarsToGoal;
+        morePrizesThresholdSpan.innerText = dollarsToGoal;
+      }
+
+      document.getElementById("donation-total-container").style.visibility =
+        "visible";
+      document.getElementById(
+        "more-prizes-threshold-dynamic-container"
+      ).style.visibility = "visible";
+    });
+
   const sidebarWrapper = document.getElementById("sidebar-wrapper");
   let scrollToTopVisible = false;
   // Closes the sidebar menu
