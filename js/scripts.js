@@ -8,12 +8,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let scrollToTopVisible = false;
   // Closes the sidebar menu
   const menuToggle = document.body.querySelector(".menu-toggle");
-  menuToggle.addEventListener("click", (event) => {
-    event.preventDefault();
-    sidebarWrapper.classList.toggle("active");
-    _toggleMenuIcon();
-    menuToggle.classList.toggle("active");
-  });
+  if (menuToggle != null) {
+    menuToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      sidebarWrapper.classList.toggle("active");
+      _toggleMenuIcon();
+      menuToggle.classList.toggle("active");
+    });
+  }
 
   // Closes responsive menu when a scroll trigger link is clicked
   var scrollTriggerList = [].slice.call(
@@ -62,6 +64,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function fadeOut(el) {
+  if (el == null) {
+    return;
+  }
   el.style.opacity = 1;
   (function fade() {
     if ((el.style.opacity -= 0.1) < 0) {
@@ -73,6 +78,9 @@ function fadeOut(el) {
 }
 
 function fadeIn(el, display) {
+  if (el == null) {
+    return;
+  }
   el.style.opacity = 0;
   el.style.display = display || "block";
   (function fade() {
