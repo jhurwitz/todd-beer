@@ -66,6 +66,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
         morePrizesThresholdSpan.innerText = dollarsToGoal;
       }
 
+      const percentToGoal = Math.floor(
+        Math.min(100, (data.data.dollars / NEXT_GOAL) * 100)
+      );
+      document.getElementById("progress-label").innerText = percentToGoal;
+      document.getElementById(
+        "progress-indicator"
+      ).style.width = `${percentToGoal}%`;
+
       document.getElementById(
         "more-prizes-threshold-dynamic-container"
       ).style.visibility = "visible";
