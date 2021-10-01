@@ -84,6 +84,23 @@
   color: #fff;
 }
 
+.animated-section {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.animated-section:not(.visible-section) {
+  height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.animated-section.visible-section {
+  height: auto;
+  opacity: 1;
+}
+
 /*!
 * Start Bootstrap - Stylish Portfolio v6.0.3 (https://startbootstrap.com/theme/stylish-portfolio)
 * Copyright 2013-2021 Start Bootstrap

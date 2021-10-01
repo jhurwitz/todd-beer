@@ -77,7 +77,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
       document.getElementById(
         "more-prizes-threshold-dynamic-container"
       ).style.visibility = "visible";
-      document.getElementById("section-progress").style.display = "block";
+      document.getElementById("section-progress").className +=
+        " visible-section";
     });
 
   const sidebarWrapper = document.getElementById("sidebar-wrapper");
