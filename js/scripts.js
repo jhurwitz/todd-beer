@@ -15,6 +15,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     NEXT_GOAL
   ).toLocaleString()}.`;
 
+  document.getElementById("stat-goal").innerText =
+    Number(NEXT_GOAL).toLocaleString();
+
   fetch(
     "https://script.google.com/macros/s/AKfycbyOWUsJXvVOrY4G5LExslJ0xxAaHkrLa1pDLdopNsiaI3TRy6Xx/exec",
     {
@@ -38,24 +41,35 @@ window.addEventListener("DOMContentLoaded", (event) => {
         return;
       }
 
-      const totalSpan = document.getElementById("donation-total");
-      totalSpan.innerText = `\$${Number(data.data.dollars).toLocaleString()}`;
+      document.getElementById("stat-dollars").innerText = `\$${Number(
+        data.data.dollars
+      ).toLocaleString()}`;
+      document.getElementById("stat-donors").innerText = Number(
+        data.data.donors
+      ).toLocaleString();
+      const daysLeft = Math.ceil(
+        (new Date("Oct 22 2021 22:00:00 GMT-0700") - new Date()) /
+          (24 * 60 * 60 * 1000)
+      );
+      document.getElementById("stat-days").innerText = daysLeft;
+      if (daysLeft === 1) {
+        document.getElementById("label-days").innerText = "day to go";
+      }
 
       if (data.data.dollars < NEXT_GOAL) {
         const dollarsToGoal = `once we have raised \$${Number(
           NEXT_GOAL
-        ).toLocaleString()}. We're only \$${Number(
+        ).toLocaleString()}. We’re only \$${Number(
           NEXT_GOAL - data.data.dollars
         ).toLocaleString()} away!`;
         morePrizesThresholdDynamicSpan.innerText = dollarsToGoal;
         morePrizesThresholdSpan.innerText = dollarsToGoal;
       }
 
-      document.getElementById("donation-total-container").style.visibility =
-        "visible";
       document.getElementById(
         "more-prizes-threshold-dynamic-container"
       ).style.visibility = "visible";
+      document.getElementById("section-progress").style.display = "block";
     });
 
   const sidebarWrapper = document.getElementById("sidebar-wrapper");
