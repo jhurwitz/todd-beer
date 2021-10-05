@@ -15,8 +15,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     NEXT_GOAL
   ).toLocaleString()}.`;
 
-  document.getElementById("stat-goal").innerText =
-    Number(NEXT_GOAL).toLocaleString();
+  /* document.getElementById("stat-goal").innerText =
+    Number(NEXT_GOAL).toLocaleString(); */
 
   fetch(
     "https://script.google.com/macros/s/AKfycbyOWUsJXvVOrY4G5LExslJ0xxAaHkrLa1pDLdopNsiaI3TRy6Xx/exec",

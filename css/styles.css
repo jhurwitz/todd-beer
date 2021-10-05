@@ -83,6 +83,16 @@
 .progress-label {
   font-size: 2rem;
   color: #fff;
+  padding: 0 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .progress-label {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
 }
 
 .animated-section {
