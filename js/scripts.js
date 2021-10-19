@@ -4,20 +4,6 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
 window.addEventListener("DOMContentLoaded", (event) => {
-  const NEXT_GOAL = 25000;
-  const morePrizesThresholdDynamicSpan = document.getElementById(
-    "more-prizes-threshold-dynamic"
-  );
-  const morePrizesThresholdSpan = document.getElementById(
-    "more-prizes-threshold"
-  );
-  morePrizesThresholdSpan.innerText = `once we have raised \$${Number(
-    NEXT_GOAL
-  ).toLocaleString()}.`;
-
-  /* document.getElementById("stat-goal").innerText =
-    Number(NEXT_GOAL).toLocaleString(); */
-
   fetch(
     "https://script.google.com/macros/s/AKfycbyOWUsJXvVOrY4G5LExslJ0xxAaHkrLa1pDLdopNsiaI3TRy6Xx/exec",
     {
@@ -47,36 +33,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
       document.getElementById("stat-donors").innerText = Number(
         data.data.donors
       ).toLocaleString();
+
+      const endDate = new Date("Oct 22 2021 22:00:00 GMT-0700");
       const daysLeft = Math.ceil(
-        (new Date("Oct 22 2021 22:00:00 GMT-0700") - new Date()) /
-          (24 * 60 * 60 * 1000)
+        (endDate - new Date()) / (24 * 60 * 60 * 1000)
       );
-      document.getElementById("stat-days").innerText = daysLeft;
-      if (daysLeft === 1) {
-        document.getElementById("label-days").innerText = "day to go";
+      const hoursLeft = Math.ceil((endDate - new Date()) / (60 * 60 * 1000));
+
+      if (daysLeft > 1) {
+        document.getElementById("stat-days").innerText = daysLeft;
+      } else {
+        document.getElementById("stat-days").innerText = hoursLeft;
+        if (hoursLeft === 1) {
+          document.getElementById("label-days").innerText = "hour to go";
+        } else {
+          document.getElementById("label-days").innerText = "hours to go";
+        }
       }
 
-      if (data.data.dollars < NEXT_GOAL) {
-        const dollarsToGoal = `once we have raised \$${Number(
-          NEXT_GOAL
-        ).toLocaleString()}. We’re only \$${Number(
-          NEXT_GOAL - data.data.dollars
-        ).toLocaleString()} away!`;
-        morePrizesThresholdDynamicSpan.innerText = dollarsToGoal;
-        morePrizesThresholdSpan.innerText = dollarsToGoal;
-      }
-
-      const percentToGoal = Math.floor(
-        Math.min(100, (data.data.dollars / NEXT_GOAL) * 100)
-      );
+      const LAST_GOAL = 25000;
+      const percentToGoal = Math.floor((data.data.dollars / LAST_GOAL) * 100);
       document.getElementById("progress-label").innerText = percentToGoal;
-      document.getElementById(
-        "progress-indicator"
-      ).style.width = `${percentToGoal}%`;
 
-      document.getElementById(
-        "more-prizes-threshold-dynamic-container"
-      ).style.visibility = "visible";
       document.getElementById("section-progress").className +=
         " visible-section";
     });
