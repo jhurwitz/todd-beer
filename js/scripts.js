@@ -35,10 +35,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
       ).toLocaleString();
 
       const endDate = new Date("Oct 23 2021 22:00:00 GMT-0700");
-      const daysLeft = Math.ceil(
-        (endDate - new Date()) / (24 * 60 * 60 * 1000)
+      const daysLeft = Math.max(
+        0,
+        Math.ceil((endDate - new Date()) / (24 * 60 * 60 * 1000))
       );
-      const hoursLeft = Math.ceil((endDate - new Date()) / (60 * 60 * 1000));
+      const hoursLeft = Math.max(
+        0,
+        Math.ceil((endDate - new Date()) / (60 * 60 * 1000))
+      );
 
       if (daysLeft > 1) {
         document.getElementById("stat-days").innerText = daysLeft;
