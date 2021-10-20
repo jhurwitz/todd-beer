@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         data.data.donors
       ).toLocaleString();
 
-      const endDate = new Date("Oct 22 2021 22:00:00 GMT-0700");
+      const endDate = new Date("Oct 23 2021 22:00:00 GMT-0700");
       const daysLeft = Math.ceil(
         (endDate - new Date()) / (24 * 60 * 60 * 1000)
       );
