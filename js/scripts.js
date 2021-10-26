@@ -4,65 +4,6 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
 window.addEventListener("DOMContentLoaded", (event) => {
-  fetch(
-    "https://script.google.com/macros/s/AKfycbyOWUsJXvVOrY4G5LExslJ0xxAaHkrLa1pDLdopNsiaI3TRy6Xx/exec",
-    {
-      method: "POST",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: JSON.stringify({
-        method: "GET",
-        sheet: "totals",
-        id: 2,
-      }),
-    }
-  )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      if (data == null || data.status !== 200 || data.data == null) {
-        return;
-      }
-
-      document.getElementById("stat-dollars").innerText = `\$${Number(
-        data.data.dollars
-      ).toLocaleString()}`;
-      document.getElementById("stat-donors").innerText = Number(
-        data.data.donors
-      ).toLocaleString();
-
-      const endDate = new Date("Oct 22 2021 22:00:00 GMT-0700");
-      const daysLeft = Math.max(
-        0,
-        Math.ceil((endDate - new Date()) / (24 * 60 * 60 * 1000))
-      );
-      const hoursLeft = Math.max(
-        0,
-        Math.ceil((endDate - new Date()) / (60 * 60 * 1000))
-      );
-
-      if (daysLeft > 1) {
-        document.getElementById("stat-days").innerText = daysLeft;
-      } else {
-        document.getElementById("stat-days").innerText = hoursLeft;
-        if (hoursLeft === 1) {
-          document.getElementById("label-days").innerText = "hour to go";
-        } else {
-          document.getElementById("label-days").innerText = "hours to go";
-        }
-      }
-
-      const LAST_GOAL = 25000;
-      const percentToGoal = Math.floor((data.data.dollars / LAST_GOAL) * 100);
-      document.getElementById("progress-label").innerText = percentToGoal;
-
-      document.getElementById("section-progress").className +=
-        " visible-section";
-    });
-
   const sidebarWrapper = document.getElementById("sidebar-wrapper");
   let scrollToTopVisible = false;
   // Closes the sidebar menu
