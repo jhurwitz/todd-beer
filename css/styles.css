@@ -8,6 +8,14 @@
   justify-content: center;
 }
 
+.brewery {
+  font-style: italic;
+}
+
+.winner {
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 600px) {
   .stats {
     flex-direction: column;
